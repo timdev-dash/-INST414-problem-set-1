@@ -1,9 +1,6 @@
 PROBLEM SET #1: CREATING NEWTORKS FROM JSON DATA 
 
 Instructions: 
-- Fork and clone the Problem Set 1 code package from GitHub into VS Code on your laptop
-- You should align the code package with your GitHub account 
-- Read through the Problem Set 1.pptx deck posted in ELMS
 - You will use imbd_movie data for both parts of this problem set: https://github.com/cbuntain/umd.inst414/blob/main/data/imdb_movies_2000to2022.prolific.json?raw=true
 - - This dataset contains a sample of movies released betwen 2000-2022, their titles, genres, release years, ratings, and top-billed actors.
 - - Remember to spend some time to get to know the data before you start on the two analysis parts
