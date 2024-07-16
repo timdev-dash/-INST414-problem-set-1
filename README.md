@@ -1,4 +1,4 @@
-PROBLEM SET #1: CREATING NEWTORKS FROM JSON DATA 
+PROBLEM SET #1: CREATING NETWORKS FROM JSON DATA 
 
 Instructions: 
 - You will use imbd_movie data for both parts of this problem set: https://github.com/cbuntain/umd.inst414/blob/main/data/imdb_movies_2000to2022.prolific.json?raw=true
