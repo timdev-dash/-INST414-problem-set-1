@@ -6,6 +6,7 @@ You will run this project from main.py, so need to set things up accordingly
 import json
 import requests
 from pathlib import Path
+from json_cleanup import cleanup
 
 '''
 import analysis_network_centrality
@@ -26,17 +27,17 @@ def ingest():
     response:requests = requests.get(url, params=download_settings)
 
     # Creates reference to current folder, for use in providing relative folder references to other files
-    main_folder = Path(__file__).absolute().parent
+    main_folder:Path = Path(__file__).absolute().parent
 
     # Saves requested file in /data directory for processing and further use
     with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "wb") as file:
         file.write(response.content)
-        print(file)
 
 
 # Call functions / instanciate objects from the two analysis .py files
 def main():
     ingest()
+    cleanup()
 
 
 
