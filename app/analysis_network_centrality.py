@@ -8,7 +8,6 @@ Using the imbd_movies dataset
 - Make sure the code is line with the standards we're using in this class 
 '''
 
-import numpy as np
 import pandas as pd
 import networkx as nx
 import json
@@ -24,7 +23,7 @@ actors_data:pd = pd.DataFrame(columns= [ 'left_actor_name' , '<->', 'right_actor
 main_folder:Path = Path(__file__).absolute().parent
 
 # Opens requested file in /data directory to process actors
-with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "r") as file:
+with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "r", encoding = 'UTF-8') as file:
        
     # Reading through the file to extract the list of movies for processing
     for items in file:
@@ -85,18 +84,19 @@ with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "
 # Print the info below
 print("Nodes:", len(actors_graph.nodes))
 
-
-
 # Creating dataframe for actor centrality
 number_of_nodes:int = len(actors_graph.nodes)
 list_of_centrality:list = []
 centrality_results:dict = nx.degree_centrality(actors_graph)
+
+# Looping through the graph to create list to bring into the dataframe
 index:int = 0
 
 for actor, centrality in centrality_results.items():
     list_of_centrality.append([actor, centrality])
     index += 1
-    
+
+# Creation of the dataframe
 actor_centrality:pd = pd.DataFrame(list_of_centrality, columns=['Actor Name', 'Centrality'])
 
 # Deep copy to organize results by highest centrality
