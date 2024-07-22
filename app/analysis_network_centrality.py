@@ -33,7 +33,7 @@ with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "
         # Reading through each movie to extract and save actor relationship data
         for this_movie in movies:
     
-            # Setting actor iterator and loop lenght for node adding loop
+            # Setting actor iterator and loop length for node adding loop
             actor:int = 0
             actors_list_length:int = len(this_movie['actors'])
 
