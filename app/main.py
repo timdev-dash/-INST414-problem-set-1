@@ -3,13 +3,12 @@ Pull down the imbd_movies dataset here and save to /data as imdb_movies_2000to20
 You will run this project from main.py, so need to set things up accordingly
 '''
 
-import json
-import requests
 from pathlib import Path
+import requests
 from json_cleanup import cleanup
+from analysis_network_centrality import centrality
 
 '''
-import analysis_network_centrality
 import analysis_similar_actors_genre
 '''
 
@@ -24,7 +23,7 @@ def ingest():
     download_settings:dict = {"downloadformat": "json"}
 
     # Requests data from imbd site
-    response:requests = requests.get(url, params=download_settings)
+    response:requests = requests.get(url, params = download_settings, timeout = 90)
 
     # Creates reference to current folder, for use in providing relative folder references to other files
     main_folder:Path = Path(__file__).absolute().parent
@@ -38,6 +37,7 @@ def ingest():
 def main():
     ingest()
     cleanup()
+    centrality()
 
 
 

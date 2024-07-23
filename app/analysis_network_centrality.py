@@ -8,16 +8,18 @@ Using the imbd_movies dataset
 - Make sure the code is line with the standards we're using in this class 
 '''
 
-import pandas as pd
-import networkx as nx
 import json
 from pathlib import Path
+import pandas as pd
+import networkx as nx
+from datetime import datetime
 
 # Build the graph
 actors_graph:nx = nx.Graph()
 
 # Set up your dataframe(s) -> the df that's output to a CSV should include at least the columns 'left_actor_name', '<->', 'right_actor_name'
 actors_data:pd = pd.DataFrame(columns= [ 'left_actor_name' , '<->', 'right_actor_name'])
+actors_data.reset_index()
 
 # Creates reference to current folder, for use in providing relative folder references to other files
 main_folder:Path = Path(__file__).absolute().parent
@@ -75,6 +77,10 @@ with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "
                     # Adding the actor pair to the graph using the movie title as an edge label
                     actors_graph.add_edge( left_actor_name, right_actor_name, label=this_movie['title'])
 
+                    # Adding the actor pair to the dataframe
+                    ### actors_data.append([left_actor_name, '<->', right_actor_name], ignore_index = True)
+                    actors_data.loc[len(actors_data.index)] = [left_actor_name, '<->', right_actor_name]
+
                     # Stepping the second actors iterator up by one
                     j += 1
 
@@ -103,8 +109,12 @@ actor_centrality:pd = pd.DataFrame(list_of_centrality, columns=['Actor Name', 'C
 most_central:pd = actor_centrality.copy()
 
 #Print the 10 the most central nodes
-
 print(most_central.head(10).sort_values(by = 'Centrality', ascending = False))
 
-# Output the final dataframe to a CSV named 'network_centrality_{current_datetime}.csv' to `/data`
+# Setup complete relative location for '/data'
+current_time:datetime = datetime.now()
+file_time:str = current_time.strftime('%y%m%d_%H%M')
+output_file_name:str = 'network_centrality_' + file_time + '.csv'
 
+# Output the final dataframe to a CSV named 'network_centrality_{current_datetime}.csv' to `/data`
+actors_data.to_csv(main_folder / "../data" / output_file_name, sep = '\t', encoding =  'UTF-8')
