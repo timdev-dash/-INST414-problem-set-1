@@ -35,6 +35,11 @@ def ingest():
 
 # Call functions / instanciate objects from the two analysis .py files
 def main():
+    '''
+    Main function
+
+    Runs through the steps to ingest, cleanup, and analyze imbd json data
+    '''
     ingest()
     cleanup()
     centrality()
