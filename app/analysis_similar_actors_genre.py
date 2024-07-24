@@ -107,15 +107,6 @@ with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "
         # Extracting movies from file
         movies = json.loads(items)
 
-        # Building the default genre count for use when initially adding actors
-        default_genre_length:int = len(added_genres)
-        step:int = 0
-        default_genre_count:dict = {}
-
-        while step < default_genre_length:
-               default_genre_count.update({added_genres[step] : 0})
-               step += 1
-
         # Reading through each movie to extract and save actor data
         for this_movie in movies:
 
@@ -167,9 +158,9 @@ with open(main_folder / "../data/imdb_movies_2000to2022.prolific.json", mode = "
                                 dict_for_inclusion:dict = {'Actor_Name' : actor_name, 'Actor_ID': actor_id}
 
                                 # Add the zero count for each genre to the row
-                                dict_for_inclusion.update(default_genre_count)
                                 row_for_inclusion = pd.DataFrame([dict_for_inclusion])
                                 actors_genres = actors_genres._append(row_for_inclusion, ignore_index = True)
+                                actors_genres.fillna(0, inplace = True)
                         else:
                                 pass
                         

@@ -7,10 +7,8 @@ from pathlib import Path
 import requests
 from json_cleanup import cleanup
 from analysis_network_centrality import centrality
+from analysis_similar_actors_genre import similarity
 
-'''
-import analysis_similar_actors_genre
-'''
 
 # Ingest and save the imbd_movies dataset frpm https://raw.githubusercontent.com/cbuntain/umd.inst414/main/data/imdb_movies_2000to2022.prolific.json
 def ingest():
@@ -43,6 +41,7 @@ def main():
     ingest()
     cleanup()
     centrality()
+    similarity()
 
 
 
