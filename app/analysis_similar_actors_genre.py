@@ -26,7 +26,6 @@ Using the imbd_movies dataset:
 import json
 from pathlib import Path
 from datetime import datetime
-import numpy as np
 from sklearn.metrics.pairwise import cosine_distances
 import pandas as pd
 
@@ -237,10 +236,17 @@ def similarity():
         # Setup complete relative location for '/data'
         current_time:datetime = datetime.now()
         file_time:str = current_time.strftime('%y%m%d_%H%M')
-        output_file_name:str = 'actor_genre_test_' + file_time + '.csv'
+        output_file_name:str = 'network_cetnrality_' + file_time + '.csv'
 
         # Output the final dataframe to a CSV named 'network_centrality_{current_datetime}.csv' to `/data`
         actors_genres.to_csv(main_folder / "../data" / output_file_name, sep = '\t', encoding =  'UTF-8')
+
+        # Describe in a print() statement how this list changes based on Euclidean distance
+        print('When using euclidean distance instead of cosine distance for the analysis, and entirely different\n'
+              + 'group of actors match. In comparing the results for Chris Hemsworth, the closest next match was\n'
+              + 'instead Racheal Taylor. Reviewing their compared genre counts, her overall blend of genres is\n'
+              + 'not nearly as similar to Chris Hemsworth in comparison to Tom Cruise. In this instance, a\n'
+              + 'a euclidean analysis would not appear to be the proper measurement to use for this type of data.')
 
 if __name__ == '__main__':
         similarity()
